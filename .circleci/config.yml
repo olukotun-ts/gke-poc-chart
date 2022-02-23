@@ -83,7 +83,7 @@ jobs:
 
 workflows:
   version: 2
-  production_flow:
+  make-updates:
     when: <<pipeline.parameters.appVersion>>
     jobs:
       - update-appVersion
@@ -95,6 +95,7 @@ workflows:
           requires:
             - package-chart
           context: cloudSecrets
+  no-updates:
     when: 
       not: <<pipeline.parameters.appVersion>>
     jobs:
