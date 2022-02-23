@@ -23,7 +23,8 @@ jobs:
             wget https://github.com/mikefarah/yq/releases/download/v4.20.2/yq_linux_amd64.tar.gz -O - | \
               tar xz && sudo mv yq_linux_amd64 /usr/bin/yq
             IMAGE_TAG=<<pipeline.parameters.appVersion>>
-            yq eval --inplace '.image.tag = env(IMAGE_TAG)' values.yaml
+            echo $IMAGE_TAG
+            yq --inplace '.image.tag = strenv(IMAGE_TAG)' values.yaml
             git commit -am 'Update image tag'
   package-chart:
     docker:
