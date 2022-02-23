@@ -24,7 +24,6 @@ jobs:
             snap install yq
             IMAGE_TAG=<<pipeline.parameters.appVersion>>
             yq eval --inplace '.image.tag = env(IMAGE_TAG)' values.yaml
-            git status
             git commit -am 'Update image tag'
   package-chart:
     docker:
@@ -86,7 +85,10 @@ workflows:
       - package-chart:
           requires:
             - update-appVersion
+          context: cloudSecrets
       - upgrade-deployment:
           requires:
             - package-chart
+          context: cloudSecrets
+          
         
