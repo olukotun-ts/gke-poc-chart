@@ -29,6 +29,7 @@ jobs:
             git config user.email "${CIRCLE_USERNAME}@${CIRCLE_PROJECT_USERNAME}.bot"
             git config user.name "${CIRCLE_USERNAME}"
             git commit -am 'Update image tag'
+            git push -u origin master
   package-chart:
     docker:
       - image: cimg/base:edge
