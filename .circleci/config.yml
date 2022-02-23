@@ -22,7 +22,7 @@ jobs:
           name: Update appVersion
           command: |
             wget https://github.com/mikefarah/yq/releases/download/v4.20.2/yq_linux_amd64.tar.gz -O - | \
-              tar xz && mv yq_linux_amd64 /usr/bin/yq
+              tar xz && sudo mv yq_linux_amd64 /usr/bin/yq
             IMAGE_TAG=<<pipeline.parameters.appVersion>>
             yq eval --inplace '.image.tag = env(IMAGE_TAG)' values.yaml
             git commit -am 'Update image tag'
