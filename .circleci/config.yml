@@ -22,7 +22,7 @@ jobs:
           name: Update appVersion
           command: |
             snap install yq
-            IMAGE_TAG=<<parameters.appVersion>>
+            IMAGE_TAG=<<pipeline.parameters.appVersion>>
             yq eval --inplace '.image.tag = env(IMAGE_TAG)' values.yaml
             git status
             git commit -am 'Update image tag'
